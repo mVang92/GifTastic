@@ -25,17 +25,21 @@ $(document).ready(function(){
 
     // Loop appends a button for each string in the array
     for (i = 0; i < topics.length; i++){
-        buttons = topics[i];
-        $("#animalButton").append('<button class="gif" value=' + i + '>' + buttons + '</button> ');
-        console.log(buttons);
+        var mButton = $("<button>")
+        mButton.addClass("gif");
+        mButton.attr("data-name", topics[i]).text(topics[i]);
+        $("#movieButton").append(" ", mButton);
     }
 
     $("#addShow").on("click", function(){
         // evt.preventDefault();
-        console.log("buttons works");
         var show = $("#showLength").val().trim();
         topics.push(show);
-        $("#animalButton").append('<button class="gif" value=' + i + '>' + show + '</button> ');
+        mButton = $("<button>")
+        mButton.addClass("gif");
+        mButton.attr("data-name", topics[i]).text(topics[i]);
+        $("#movieButton").append(" ", mButton);
+
         console.log(topics);
         $("#showLength").val("");
         $(this).prop("disabled", true);
@@ -53,6 +57,32 @@ $(document).ready(function(){
             method: "GET"
         }).then(function(response) {
             console.log(response)
+            var results = response.data;
+
+        // ========================
+
+        for (var i = 0; i < results.length; i++) {
+
+            // Step 3: uncomment the for loop above and the closing curly bracket below.
+            // Make a div with jQuery and store it in a variable named movieDiv.
+            var movieDiv = $("<div>");
+            // Make a paragraph tag with jQuery and store it in a variable named p.
+            var p = $("<p>");
+            // Set the inner text of the paragraph to the rating of the image in results[i].
+            p.html(results[i].rating);
+            // Make an image tag with jQuery and store it in a variable named image.
+            var image = $("<img>");
+            // Set the image's src to results[i]'s fixed_height.url.
+            image.attr("src", results[i].images.fixed_height.url);
+            // Append the p variable to the movieDiv variable.
+            p.append(movieDiv);
+            // Append the image variable to the movieDiv variable.
+            movieDiv.append(image);
+            // Prepend the movieDiv variable to the element with an id of gifs-appear-here.
+            $("#gifs").prepend(movieDiv);
+
+            // ==================================
+            }
 
         })
     })
