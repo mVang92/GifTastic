@@ -63,7 +63,6 @@ $(document).ready(function(){
 
         for (var i = 0; i < results.length; i++) {
 
-            // Step 3: uncomment the for loop above and the closing curly bracket below.
             // Make a div with jQuery and store it in a variable named movieDiv.
             var movieDiv = $("<div>");
             // Make a paragraph tag with jQuery and store it in a variable named p.
