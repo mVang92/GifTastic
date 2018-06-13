@@ -10,30 +10,49 @@ var topics = [
 var buttons;
 
 $(document).ready(function(){
+    // Initially disables the submit box
+    $("#addShow").prop("disabled", true);
+
+    // Enables the submit button only when there is text in the dialog box
+    // Diables the box if text is not present
+    $("#showLength").keyup(function(){
+        if($("#showLength").val() == ""){
+            $("#addShow").prop("disabled", true);
+        } else {
+            $("#addShow").removeAttr("disabled");
+        }
+    })
+
     // Loop appends a button for each string in the array
     for (i = 0; i < topics.length; i++){
         buttons = topics[i];
-        $("#animalButton").append('<button class="gif">' + buttons + '</button> ');
+        $("#animalButton").append('<button class="gif" value=' + i + '>' + buttons + '</button> ');
         console.log(buttons);
     }
 
-    $("#addAnimal").on("click", function(){
+    $("#addShow").on("click", function(){
         // evt.preventDefault();
         console.log("buttons works");
+        var show = $("#showLength").val().trim();
+        topics.push(show);
+        $("#animalButton").append('<button class="gif" value=' + i + '>' + show + '</button> ');
+        console.log(topics);
+        $("#showLength").val("");
+        $(this).prop("disabled", true);
     })
 
     // When the user clicks on a button, the page should grab 10 static, 
     // non-animated gif images from the GIPHY API and place them on the page.
     $(".gif").on("click", function(){
-        var animal = $(this).attr("data-animal");
+        var show = $(this).attr("data-name");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        animal + "&api_key=dc6zaTOxFJmzC&limit=10";
+            show + "&api_key=whIW4NL8ItI77ZD3d2Yomtb0G40WFANS&limit=10";
 
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function(response) {
-
+            console.log(response)
 
         })
     })
