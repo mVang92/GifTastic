@@ -33,6 +33,7 @@ $(document).ready(function(){
             mButton.text(topics[i]);
             $("#movieButton").append(" ", mButton);
         }
+        generateGif();
     }
 
     $("#submit").on("click", function(){
@@ -47,7 +48,7 @@ $(document).ready(function(){
         // console.log(topics);
         $("#showLength").val("");
         $(this).prop("disabled", true);
-        generateGif();
+        
     })
 
     function generateGif(){
@@ -68,8 +69,8 @@ $(document).ready(function(){
 
                 for (n = 0; n < results.length; n++) {
 
-                    // Make a div with jQuery and store it in a variable named movieDiv.
-                    var movieDiv = $("<div>");
+                    // Make a div with jQuery and store it in a variable named showDiv.
+                    var showDiv = $("<div>");
                     // Make a paragraph tag with jQuery and store it in a variable named p.
                     var p = $("<p>");
                     // Set the inner text of the paragraph to the rating of the image in results[i].
@@ -78,16 +79,24 @@ $(document).ready(function(){
                     var image = $("<img>");
                     // Set the image's src to results[i]'s fixed_height.url.
                     image.attr("src", results[n].images.fixed_height.url);
-                    // Append the p variable to the movieDiv variable.
-                    p.append(movieDiv);
-                    // Append the image variable to the movieDiv variable.
-                    movieDiv.append(image);
-                    // Prepend the movieDiv variable to the element with an id of gifs.
-                    $("#gifs").prepend(movieDiv);
-
+                    // image.attr("src", results[n].images.fixed_height.url + "data-still=" + results[n].images.fixed_height.url + "data-animate=" + results[n].images.fixed_height.url);
+                    // Append the p variable to the showDiv variable.
+                    p.append(showDiv);
+                    // Append the image variable to the showDiv variable.
+                    showDiv.append(image);
+                    // Prepend the showDiv variable to the element with an id of gifs.
+                    $("#gifs").prepend(showDiv);    
                 }
 
             })
+            var state = $(this).attr("data-state");
+            if (state === "still") {
+                $(this).attr("src", $(this).attr("data-animate"));
+                $(this).attr("data-state", "animate");
+              } else {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+              }
         })
     }
     renderButtons();
