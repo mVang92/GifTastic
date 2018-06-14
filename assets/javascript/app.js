@@ -44,17 +44,17 @@ $(document).ready(function(){
         mButton.addClass("showGif");
         mButton.attr("data-name", topics[i]).text(topics[i]);
         $("#movieButton").append(" ", mButton);
-        renderButtons();
         // console.log(topics);
         $("#showLength").val("");
         // Disables the submit button when clicked
         $(this).prop("disabled", true);
+        renderButtons();
     })
 
     // This function contains our Ajax and API code
     function generateGif(){
-    // When the user clicks on a button, the page should grab 10 static, 
-    // non-animated gif images from the GIPHY API and place them on the page.
+        // When the user clicks on a button, the page should grab 10 static, 
+        // non-animated gif images from the GIPHY API and place them on the page.
         $(".showGif").on("click", function(){
             // This variable stores the data-name attribute (just the name of the button)
             // of the image that has been clicked (hence "this")
@@ -78,11 +78,13 @@ $(document).ready(function(){
                 for (n = 0; n < results.length; n++) {
                     // Make an image tag with jQuery and store it in a variable named image.
                     var image = $("<img>");
-                    // Set the image's src to results[i]'s fixed_height.url.
+                    // Set the image's src to results[n]'s fixed_height_still.url.
                     image.attr("src", results[n].images.fixed_height_still.url);
-                    // image.attr("data-still", results[n].images.fixed_height_still.url);
+                    // Create an attribute data-state and set it to still
                     image.attr("data-state", "still");
+                    // Create an attribute data-still and set it to the still image
                     image.attr("data-still", results[n].images.fixed_height_still.url);
+                    // Create a final attribute data-animate, set it to the fixed_height
                     image.attr("data-animate", results[n].images.fixed_height.url);
                     // Prepend the showDiv variable to the element with an id of gifs.
                     $("#gifs").prepend(image);
