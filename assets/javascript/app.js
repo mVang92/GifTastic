@@ -36,8 +36,9 @@ $(document).ready(function(){
     }
 
     // Submit button function
-    $("#submit").on("click", function(){
-        // evt.preventDefault();
+    $("#submit").on("click", function(evt){
+        // console.log("we hit the click")
+        evt.preventDefault();
         var show = $("#showLength").val().trim();
         topics.push(show);
         mButton = $("<button>")
@@ -61,23 +62,26 @@ $(document).ready(function(){
             var show = $(this).attr("data-name");
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
                 show + "&api_key=whIW4NL8ItI77ZD3d2Yomtb0G40WFANS&limit=10";
-
+            
             // Ajax Start
             $.ajax({
                 url: queryURL,
                 method: "GET"
             }).then(function(response) {
-                // console.log(response)
+                console.log(response)
                 var results = response.data;
                 var image;  
+                // Empty out the old gifs
+                $("#gifs").empty();
 
                 // This loop generates the gifs from the API.
                 // We are looking for 10 results, hence limit=10
                 // at the end of the url for the variable queryURL.
                 // There will be 10 results for each topic (or result in this case)
                 for (n = 0; n < results.length; n++) {
+                    var div = $("<div class=" + 'display' + ">");
                     // Make an image tag with jQuery and store it in a variable named image.
-                    var image = $("<img>");
+                    var image = $("<img class='gifImage'>");
                     // Set the image's src to results[n]'s fixed_height_still.url.
                     image.attr("src", results[n].images.fixed_height_still.url);
                     // Create an attribute data-state and set it to still
@@ -86,8 +90,10 @@ $(document).ready(function(){
                     image.attr("data-still", results[n].images.fixed_height_still.url);
                     // Create a final attribute data-animate, set it to the fixed_height
                     image.attr("data-animate", results[n].images.fixed_height.url);
+                    div.append(image);
+                    div.append("<p class=" + 'tag' + ">Rating: " + results[n].rating + "</p>");
                     // Prepend the showDiv variable to the element with an id of gifs.
-                    $("#gifs").prepend(image);
+                    $("#gifs").prepend(div);
                     $("#gifs").prepend(" ");
                 }
 

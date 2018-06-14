@@ -20,10 +20,12 @@ header {
     padding: 10px;
     width:75%;
     margin: auto;
-    background-color: bisque;
+    background-color: rgb(255, 228, 196);
     box-shadow: 10px 10px rgb(96, 96, 96);
     margin-bottom: 20px; 
     border-radius: 10px;
+    border-right: 5px solid rgb(200, 168, 128);
+    border-bottom: 5px solid rgb(168, 128, 96);
 }
 
 .input {
@@ -43,6 +45,17 @@ button, #submit {
     
 }
 
+.tag {
+    background-color: crimson;
+    transition-duration: 0.3s;
+    color: rgb(64, 64, 64);
+    opacity: 0.5;
+}
+
+.display {
+    display: inline-block;
+}
+
 #submit:hover {
     background-color: greenyellow;
     color: black;
@@ -51,4 +64,21 @@ button, #submit {
 button:hover {
     background-color: crimson;
     color: white;
+}
+
+.tag:hover {
+    background-color: red;
+    font-weight: bold;
+    color: white;
+    opacity: 1;
+}
+
+.gifImage {
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+.gifImage:hover {
+    border: 1px solid bisque;;
+    padding: 3px;
 }
