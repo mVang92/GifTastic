@@ -86,6 +86,7 @@ $(document).ready(function(){
                     image.attr("data-animate", results[n].images.fixed_height.url);
                     // Prepend the showDiv variable to the element with an id of gifs.
                     $("#gifs").prepend(image);
+                    $("#gifs").prepend(" ");
                 }
 
                 // Click on anything with the img tag, and this function
