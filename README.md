@@ -11,7 +11,7 @@ In the home page, the app already has a few topics to choose from by default. Yo
 ![Alt Text](assets/images/home.JPG)
 
 Clicking on any of the buttons will populate the page with 10 images and their ratings. Clicking on a different button will erase the page and append new images and ratings.
-![Alt Text](assets/images/home.JPG)
+![Alt Text](assets/images/demo.JPG)
 
 ## Technologies Used
 * JavaScript
